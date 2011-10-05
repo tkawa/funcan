@@ -18,6 +18,7 @@ end
 
 gem 'jquery-rails'
 gem 'less-rails-bootstrap'
+gem 'omniauth'
 
 # Use unicorn as the web server
 # gem 'unicorn'
