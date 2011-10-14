@@ -16,7 +16,10 @@ class ApplicationController < ActionController::Base
     end
 
     def authenticate_user!
-      unless user_signed_in?
+      if user_signed_in?
+        Twitter.oauth_token = current_user.token
+        Twitter.oauth_token_secret = current_user.secret
+      else
         flash[:error] = 'You need to sign in before accessing this page!'
         redirect_to sign_in_url
       end

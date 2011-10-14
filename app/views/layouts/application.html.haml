@@ -14,4 +14,5 @@
         = link_to 'sign in with Twitter', sign_in_path
     = yield
     %footer
-      footer
+      - limit = Twitter.rate_limit_status
+      API: #{limit.remaining_hits} / #{limit.hourly_limit}

@@ -4,6 +4,12 @@ Funcan::Application.routes.draw do
   get '/sign_in/callback' => 'sessions#create'
   delete '/sign_out' => 'sessions#destroy'
 
+  resources :funcans
+
+  #root :to => 'funcans#index',
+  #     :constraints => lambda {|r| r.env["warden"].authenticate? }
+  #end
+
   root to: 'home#index'
 
   # The priority is based upon order of creation:

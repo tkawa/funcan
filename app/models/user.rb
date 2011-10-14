@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
       u.screen_name = auth['user_info']['nickname']
       u.uid = auth['uid']
       u.provider = auth['provider']
+      u.token = auth['credentials']['token']
+      u.secret = auth['credentials']['secret']
     end
   end
 end

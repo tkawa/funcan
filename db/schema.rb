@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(:version => 20111005083402) do
     t.string   "screen_name", :null => false
     t.string   "uid",         :null => false
     t.string   "provider",    :null => false
+    t.string   "token",       :null => false
+    t.string   "secret",      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
