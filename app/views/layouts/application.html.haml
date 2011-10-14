@@ -1,0 +1,17 @@
+!!!
+%html
+  %head
+    %title Funcan
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    %header
+      - if user_signed_in?
+        #{current_user.name} さん
+        = button_to 'sign out', sign_out_path, method: :delete
+      - else
+        = link_to 'sign in with Twitter', sign_in_path
+    = yield
+    %footer
+      footer

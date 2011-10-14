@@ -1,4 +1,11 @@
 Funcan::Application.routes.draw do
+  resources :users
+
+  get '/sign_in/callback' => 'sessions#create'
+  delete '/sign_out' => 'sessions#destroy'
+
+  root to: 'home#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -17,6 +17,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'haml'
 gem 'less-rails-bootstrap'
 gem 'omniauth'
 
@@ -28,6 +29,10 @@ gem 'omniauth'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+group :development do
+  gem 'erb2haml'
+end
 
 group :test do
   # Pretty printed test output
