@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %title Funcan
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body{style: 'padding-top: 60px;'}
+    %header.topbar
+      .topbar-inner
+        .container
+          .brand
+            FunCan
+          = button_to 'sign in with Twitter', sign_in_path, method: :get, form_class: 'pull-right'
+    .container
+      = yield
+    %footer
+      footer

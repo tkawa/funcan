@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  #layout lambda { user_signed_in? ? 'application' : 'welcome' }
   helper_method :current_user, :user_signed_in?, :sign_in_path
 
   private

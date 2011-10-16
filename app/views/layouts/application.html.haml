@@ -5,14 +5,21 @@
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
-  %body
-    %header
-      - if user_signed_in?
-        #{current_user.name} さん
-        = button_to 'sign out', sign_out_path, method: :delete
-      - else
-        = link_to 'sign in with Twitter', sign_in_path
-    = yield
+  %body{style: 'padding-top: 60px;'}
+    %header.topbar
+      .topbar-inner
+        .container
+          .brand
+            FunCan
+          - if user_signed_in?
+            = button_to 'sign out', sign_out_path, method: :delete, form_class: 'pull-right'
+            %ul.secondary-nav
+              %li= link_to "#{current_user.name} さん", '#'
+          - else
+            = button_to 'sign in with Twitter', sign_in_path, form_class: 'pull-right'
+            -#%li= link_to 'sign in with Twitter', sign_in_path
+    .container
+      = yield
     %footer
       - limit = Twitter.rate_limit_status
       API: #{limit.remaining_hits} / #{limit.hourly_limit}

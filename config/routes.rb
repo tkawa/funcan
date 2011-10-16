@@ -6,11 +6,8 @@ Funcan::Application.routes.draw do
 
   resources :funcans
 
-  #root :to => 'funcans#index',
-  #     :constraints => lambda {|r| r.env["warden"].authenticate? }
-  #end
-
-  root to: 'home#index'
+  root to: 'funcans#index', constraints: lambda {|r| r.session[:user_id] }
+  root to: 'welcome#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
