@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title Funcan
+    %title FUNCAN
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
@@ -10,9 +10,10 @@
       .topbar-inner
         .container
           .brand
-            FunCan
+            FUNCAN 《ファンキャン》
           = button_to 'sign in with Twitter', sign_in_path, method: :get, form_class: 'pull-right'
     .container
       = yield
     %footer
-      footer
+      %address
+        kawamura at u2plus.jp

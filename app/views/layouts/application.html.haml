@@ -27,4 +27,7 @@
             side
     %footer
       - limit = Twitter.rate_limit_status
-      API: #{limit.remaining_hits} / #{limit.hourly_limit}
+      .limit
+        API: #{limit.remaining_hits} / #{limit.hourly_limit}
+      %address
+        kawamura at u2plus.jp
