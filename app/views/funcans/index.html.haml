@@ -1,4 +1,47 @@
-%ul
+.page-header
+  #main-tweet-box
+    = form_tag :funcans do
+      = label_tag :text do
+        今日楽しめたこと・できたことは？
+      .text-area
+        = text_area_tag :text, nil, class: 'xxlarge', required: true
+      .button-container
+        = button_tag class: 'btn fun', name: 'kind', value: 'fun' do
+          FUN
+        = button_tag class: 'btn can', name: 'kind', value: 'can' do
+          CAN
+        = button_tag class: 'btn funcan success', name: 'kind', value: 'funcan' do
+          FUN & CAN
+  %ul.tabs
+    %li.active= link_to 'みんなのFUNCAN', '#'
+    %li= link_to 'わたしのFUNCAN', '#'
+%article
   - @funcans.each do |f|
-    %li=f.to_json
-    
+    - f.text.gsub!(/\s+#\w+(?=\s|\Z)/, '')
+    - kinds = f.entities.hashtags.map {|h| h.text.downcase } & ['fun', 'can']
+    - kinds = ['fun', 'can'] if kinds.blank?
+    .funcan.stream-item
+      .tweet{class: kinds}
+        .tweet-image
+          = image_tag f.user.profile_image_url
+        .tweet-content
+          .tweet-row
+            %span.tweet-user-name
+              = f.user.name
+          .tweet-row
+            .tweet-text
+              = f.text
+              - kinds.each do |k|
+                %span.label{class: k}= k.upcase
+          %time.tweet-row
+            = link_to l(Time.parse(f.created_at)), "http://twitter.com/#{f.user.screen_name}/status/#{f.id_str}", class: 'tweet-timestamp'
+      .comment-container
+        %button.btn.info.small いいね！
+        = link_to '#' do
+          %span.label.notice.count 1
+        %button.btn.info.small やりたい！
+        %span.label.notice.count 0
+        %button.btn.info.small すごい！
+        %span.label.notice.count 0
+        %button.btn.info.small 気になる！
+        %span.label.notice.count 0

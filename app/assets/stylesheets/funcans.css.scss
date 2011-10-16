@@ -1,3 +1,129 @@
 // Place all the styles related to the funcans controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.stream-item {
+    border-bottom: 1px solid #ebebeb;
+    min-height: 60px;
+    clear: both;
+    margin-top: -1px;
+}
+
+.tweet {
+    padding: 10px 20px 0 20px;
+}
+
+.comment-container {
+    padding: 5px 20px 10px 20px;
+}
+
+.tweet-image {
+    float: left;
+    height: 48px;
+    width: 48px;
+    margin-top: 3px;
+}
+
+.tweet-content {
+    margin-left: 58px;
+    min-height: 48px;
+}
+
+.tweet-text {
+    font-size: 15px;
+}
+
+.tweet-text .label {
+    padding: 2px 4px 3px 4px;
+}
+
+.tweet-content time {
+    font-size: 11px;
+}
+
+#main-tweet-box textarea {
+    width: 570px;
+    height: 56px;
+}
+
+#main-tweet-box label {
+    width: auto;
+}
+
+.button-container {
+    text-align: right;
+    margin: 5px 0 3px 0;
+    height: 29px;
+}
+
+.label.fun, .btn.fun {
+    background-color: goldenrod;
+}
+
+.btn.fun {
+    color: white;
+    background-image: -webkit-linear-gradient(top, gold, goldenrod);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.btn.fun:hover {
+    color: white;
+}
+
+.label.can, .btn.can {
+    background-color: darkorange;
+}
+
+.btn.can {
+    color: white;
+    background-image: -webkit-linear-gradient(top, orange, darkorange);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+/*
+    background-color: #57A957;
+    background-repeat: repeat-x;
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#62c462), to(#57a957));
+    background-image: -moz-linear-gradient(top, #62c462, #57a957);
+    background-image: -ms-linear-gradient(top, #62c462, #57a957);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #62c462), color-stop(100%, #57a957));
+    background-image: -webkit-linear-gradient(top, #62c462, #57a957);
+    background-image: -o-linear-gradient(top, #62c462, #57a957);
+    background-image: linear-gradient(top, #62c462, #57a957);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62c462', endColorstr='#57a957', GradientType=0);
+    border-color: #57A957 #57A957 #3D773D;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+*/
+}
+.btn.can:hover {
+    color: white;
+}
+
+/*.btn.funcan {*/
+    /*color: white;*/
+    /*background-color: green;*/
+    /*background-image: -webkit-linear-gradient(top, green, darkgreen);*/
+/*}*/
+
+.comment-container button.info.small {
+    padding: 2px 9px;
+    min-width: 75px;
+}
+
+.comment-container .label.count {
+    margin-left: 2px;
+    padding: 4px 7px 5px;
+    position: relative;
+}
+
+.comment-container .label.count::before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 4px solid transparent;
+    border-right-color: #62CFFC;
+    right: 100%;
+    top: 6px;
+}
+
+.content .page-header {
+    border-bottom-style: none;
+}

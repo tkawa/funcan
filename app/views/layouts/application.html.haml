@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title Funcan
+    %title FUNCAN
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
@@ -10,7 +10,7 @@
       .topbar-inner
         .container
           .brand
-            FunCan
+            FUNCAN 《ファンキャン》
           - if user_signed_in?
             = button_to 'sign out', sign_out_path, method: :delete, form_class: 'pull-right'
             %ul.secondary-nav
@@ -19,7 +19,12 @@
             = button_to 'sign in with Twitter', sign_in_path, form_class: 'pull-right'
             -#%li= link_to 'sign in with Twitter', sign_in_path
     .container
-      = yield
+      .content
+        .row
+          .span10
+            = yield
+          .span4
+            side
     %footer
       - limit = Twitter.rate_limit_status
       API: #{limit.remaining_hits} / #{limit.hourly_limit}
