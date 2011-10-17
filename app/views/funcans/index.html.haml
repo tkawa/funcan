@@ -16,32 +16,28 @@
     %li.active= link_to 'みんなのFUNCAN', '#'
     %li= link_to 'わたしのFUNCAN', '#'
 %article
-  - @funcans.each do |f|
-    - f.text.gsub!(/\s+#\w+(?=\s|\Z)/, '')
-    - kinds = f.entities.hashtags.map {|h| h.text.downcase } & ['fun', 'can']
+  - @funcans.each do |funcan|
+    - funcan.text.gsub!(/\s+#\w+(?=\s|\Z)/, '')
+    - kinds = funcan.entities.hashtags.map {|h| h.text.downcase } & ['fun', 'can']
     - kinds = ['fun', 'can'] if kinds.blank?
     .funcan.stream-item
       .tweet{class: kinds}
         .tweet-image
-          = image_tag f.user.profile_image_url
+          = image_tag funcan.user.profile_image_url
         .tweet-content
           .tweet-row
             %span.tweet-user-name
-              = f.user.name
+              = funcan.user.name
           .tweet-row
             .tweet-text
-              = f.text
+              = funcan.text
               - kinds.each do |k|
                 %span.label{class: k}= k.upcase
           %time.tweet-row
-            = link_to l(Time.parse(f.created_at)), "http://twitter.com/#{f.user.screen_name}/status/#{f.id_str}", class: 'tweet-timestamp'
+            = link_to l(Time.parse(funcan.created_at)), "http://twitter.com/#{funcan.user.screen_name}/status/#{funcan.id_str}", class: 'tweet-timestamp'
       .comment-container
-        %button.btn.info.small いいね！
-        = link_to '#' do
-          %span.label.notice.count 1
-        %button.btn.info.small やりたい！
-        %span.label.notice.count 0
-        %button.btn.info.small すごい！
-        %span.label.notice.count 0
-        %button.btn.info.small 気になる！
-        %span.label.notice.count 0
+        = form_tag '', remote: true, html: {'data-update-id' => "funcan_#{funcan.id_str}_comments", 'data-type' => 'html'} do
+          - Comment.types.each do |type|
+            = button_tag name: 'type', value: type, class: 'btn info small' do
+              = t type, scope: 'activerecord.model'
+            %span.label.notice.count= 0

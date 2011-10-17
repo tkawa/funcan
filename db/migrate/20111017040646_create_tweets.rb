@@ -1,6 +1,6 @@
-class CreateTweets < ActiveRecord::Migration
+class CreateFuncans < ActiveRecord::Migration
   def change
-    create_table :tweets do |t|
+    create_table :funcans do |t|
       t.string :sid, null: false
       t.integer :comments_count, null: false, default: 0
       t.integer :like_count, null: false, default: 0
@@ -10,6 +10,6 @@ class CreateTweets < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :tweets, :sid
+    add_index :funcans, :sid
   end
 end

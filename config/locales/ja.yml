@@ -231,7 +231,12 @@ ja:
         format: "%{attribute}%{message}"
 
     model:
-      user: ユーザ
+      user: ユーザー
+      comment: コメント
+      like: いいね！
+      want: やりたい！
+      great: すごい！
+      interesting: 気になる！
 
     attributes:
       user:

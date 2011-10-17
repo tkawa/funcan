@@ -4,8 +4,9 @@ class CreateComments < ActiveRecord::Migration
       t.string :text, null: false
       t.belongs_to :tweet
       t.belongs_to :user
+      t.string :sid, null: false
       t.string :uid, null: false
-      t.integer :quantity, null: false, default: 1
+      t.integer :quantity, null: false, default: 0
       t.string :type
 
       t.timestamps
