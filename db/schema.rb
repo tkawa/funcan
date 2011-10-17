@@ -11,7 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111005083402) do
+ActiveRecord::Schema.define(:version => 20111017040646) do
+
+  create_table "comments", :force => true do |t|
+    t.string   "text",       :default => "", :null => false
+    t.integer  "funcan_id"
+    t.integer  "user_id"
+    t.string   "sid",                        :null => false
+    t.string   "uid",                        :null => false
+    t.integer  "quantity",   :default => 0,  :null => false
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["sid", "user_id", "type"], :name => "index_comments_on_sid_and_user_id_and_type"
+
+  create_table "funcans", :force => true do |t|
+    t.string   "sid",                              :null => false
+    t.integer  "comments_count",    :default => 0, :null => false
+    t.integer  "like_count",        :default => 0, :null => false
+    t.integer  "want_count",        :default => 0, :null => false
+    t.integer  "great_count",       :default => 0, :null => false
+    t.integer  "interesting_count", :default => 0, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "funcans", ["sid"], :name => "index_funcans_on_sid", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "name",        :null => false

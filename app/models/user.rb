@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :comments
+
   def self.create_with_omniauth(auth)
     create! do |u|
       u.name = auth['user_info']['name']

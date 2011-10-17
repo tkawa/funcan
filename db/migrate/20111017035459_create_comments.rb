@@ -1,8 +1,8 @@
 class CreateComments < ActiveRecord::Migration
   def change
     create_table :comments do |t|
-      t.string :text, null: false
-      t.belongs_to :tweet
+      t.string :text, null: false, default: ''
+      t.belongs_to :funcan
       t.belongs_to :user
       t.string :sid, null: false
       t.string :uid, null: false
@@ -11,8 +11,6 @@ class CreateComments < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :comments, :tweet_id
-    add_index :comments, :user_id
-    add_index :comments, :uid
+    add_index :comments, [:sid, :user_id, :type]
   end
 end

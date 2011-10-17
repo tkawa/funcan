@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   private
     def current_user
-      @current_user ||= User.find(session[:user_id]) if session[:user_id]
+      @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
     end
 
     def user_signed_in?
@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
 
     def sign_in_path
       '/sign_in'
+    end
+
+    def sign_in_url
+      url_for(sign_in_path)
     end
 
     def authenticate_user!

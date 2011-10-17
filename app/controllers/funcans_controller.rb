@@ -2,13 +2,13 @@ class FuncansController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    #@funcans = Twitter.home_timeline(include_entities: true)
-    @funcans = Twitter.search('#funcan', include_entities: true)
-
+    raw = Twitter.search('#funcan', include_entities: true)
+    #funcan_cache = Funcan.where(:sid => raw.map(&:id_str)).all
+    @tweets = raw.map {|t| TweetDelegator.new(t) }
   end
 
   def public
-    @funcans = Twitter.public_timeline(include_entities: true)
+    @tweets = Twitter.public_timeline(include_entities: true).map {|t| TweetDelegator.new(t) }
     render :index
   end
 
@@ -23,8 +23,8 @@ class FuncansController < ApplicationController
           '#funcan'
       end
     text = params[:text] + ' ' + hashtag
-    @funcan = Twitter.update(text, include_entities: true)
-    if @funcan
+    @tweet = Tweet.new(text: text)
+    if @tweet.save
       redirect_to root_url
     else
       redirect_to :back, :notice => 'error'

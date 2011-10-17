@@ -1,5 +1,6 @@
 class Comment < ActiveRecord::Base
-  belongs_to :funcan, counter_cache: true
+  #belongs_to :funcan, counter_cache: 'comments_count'
+  belongs_to :user
   def self.types
     self.subclasses.map{|klass| klass.to_s.downcase }
   end

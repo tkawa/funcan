@@ -16,28 +16,30 @@
     %li.active= link_to 'みんなのFUNCAN', '#'
     %li= link_to 'わたしのFUNCAN', '#'
 %article
-  - @funcans.each do |funcan|
-    - funcan.text.gsub!(/\s+#\w+(?=\s|\Z)/, '')
-    - kinds = funcan.entities.hashtags.map {|h| h.text.downcase } & ['fun', 'can']
+  - @tweets.each do |tweet|
+    - tweet.text.gsub!(/\s+#\w+(?=\s|\Z)/, '')
+    - kinds = tweet.entities.hashtags.map {|h| h.text.downcase } & ['fun', 'can']
     - kinds = ['fun', 'can'] if kinds.blank?
     .funcan.stream-item
       .tweet{class: kinds}
         .tweet-image
-          = image_tag funcan.user.profile_image_url
+          = image_tag tweet.user.profile_image_url
         .tweet-content
           .tweet-row
             %span.tweet-user-name
-              = funcan.user.name
+              = tweet.user.name
           .tweet-row
             .tweet-text
-              = funcan.text
+              = tweet.text
               - kinds.each do |k|
                 %span.label{class: k}= k.upcase
           %time.tweet-row
-            = link_to l(Time.parse(funcan.created_at)), "http://twitter.com/#{funcan.user.screen_name}/status/#{funcan.id_str}", class: 'tweet-timestamp'
+            = link_to l(Time.parse(tweet.created_at)), "http://twitter.com/#{tweet.user.screen_name}/status/#{tweet.id_str}", class: 'tweet-timestamp'
       .comment-container
-        = form_tag '', remote: true, html: {'data-update-id' => "funcan_#{funcan.id_str}_comments", 'data-type' => 'html'} do
-          - Comment.types.each do |type|
+        - Comment.types.each do |type|
+          -#= form_tag comments_path(tweet.id_str, type), remote: true, method: :put, 'data-update-id' => "funcan_#{tweet.id_str}_comments", 'data-type' => 'html' do
+          = form_tag comments_path(tweet.id_str, type), method: :put, 'data-update-id' => "funcan_#{tweet.id_str}_comments", do
             = button_tag name: 'type', value: type, class: 'btn info small' do
               = t type, scope: 'activerecord.model'
-            %span.label.notice.count= 0
+            %span.label.notice.count= tweet.count(type)
+-#%p= @tweets.inspect

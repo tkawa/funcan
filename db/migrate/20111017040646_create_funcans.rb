@@ -10,6 +10,6 @@ class CreateFuncans < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :funcans, :sid
+    add_index :funcans, :sid, unique: true
   end
 end
