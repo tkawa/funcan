@@ -4,7 +4,12 @@ Funcan::Application.routes.draw do
   get '/sign_in/callback' => 'sessions#create'
   delete '/sign_out' => 'sessions#destroy'
 
-  resources :funcans
+  resources :funcans, only: [:index, :create] do
+    member do
+      resource :comments, path: ':type', only: [:update, :destroy],
+                          constraints: { :type => Regexp.union(Comment.types) }
+    end
+  end
   get '/public' => 'funcans#public'
 
   root to: 'funcans#index', constraints: lambda {|r| r.session[:user_id] }

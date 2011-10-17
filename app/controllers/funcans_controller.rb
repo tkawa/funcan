@@ -4,6 +4,7 @@ class FuncansController < ApplicationController
   def index
     #@funcans = Twitter.home_timeline(include_entities: true)
     @funcans = Twitter.search('#funcan', include_entities: true)
+
   end
 
   def public
