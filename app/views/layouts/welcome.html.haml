@@ -4,13 +4,15 @@
     %title FUNCAN
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
+    %meta(content='width=device-width, height=device-height, initial-scale=1.0' name='viewport')
     = csrf_meta_tags
-  %body{style: 'padding-top: 60px;'}
+  %body
     %header.topbar
       .topbar-inner
         .container
-          .brand
-            FUNCAN 《ファンキャン》
+          %h1.brand
+            FUNCAN
+            %small 《ファンキャン》
           = button_to 'sign in with Twitter', sign_in_path, method: :get, form_class: 'pull-right'
     .container
       = yield

@@ -66,7 +66,17 @@
 
 .btn.fun {
     color: white;
+    background-repeat: repeat-x;
+    background-image: -khtml-gradient(linear, left top, left bottom, from(gold), to(goldenrod));
+    background-image: -moz-linear-gradient(gold, goldenrod);
+    background-image: -ms-linear-gradient(gold, goldenrod);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, gold), color-stop(100%, goldenrod));
     background-image: -webkit-linear-gradient(top, gold, goldenrod);
+    background-image: -o-linear-gradient(gold, goldenrod);
+    background-image: linear-gradient(gold, goldenrod);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='gold', endColorstr='goldenrod', GradientType=0);
+    border-color: goldenrod goldenrod #3D773D;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 .btn.fun:hover {
@@ -79,22 +89,18 @@
 
 .btn.can {
     color: white;
-    background-image: -webkit-linear-gradient(top, orange, darkorange);
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-/*
-    background-color: #57A957;
     background-repeat: repeat-x;
-    background-image: -khtml-gradient(linear, left top, left bottom, from(#62c462), to(#57a957));
-    background-image: -moz-linear-gradient(top, #62c462, #57a957);
-    background-image: -ms-linear-gradient(top, #62c462, #57a957);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #62c462), color-stop(100%, #57a957));
-    background-image: -webkit-linear-gradient(top, #62c462, #57a957);
-    background-image: -o-linear-gradient(top, #62c462, #57a957);
-    background-image: linear-gradient(top, #62c462, #57a957);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62c462', endColorstr='#57a957', GradientType=0);
-    border-color: #57A957 #57A957 #3D773D;
+    background-image: -khtml-gradient(linear, left top, left bottom, from(orange), to(darkorange));
+    background-image: -moz-linear-gradient(orange, darkorange);
+    background-image: -ms-linear-gradient(orange, darkorange);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, orange), color-stop(100%, darkorange));
+    background-image: -webkit-linear-gradient(orange, darkorange);
+    background-image: -o-linear-gradient(orange, darkorange);
+    background-image: linear-gradient(orange, darkorange);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='orange', endColorstr='darkorange', GradientType=0);
+    border-color: darkorange darkorange #3D773D;
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-*/
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 .btn.can:hover {
     color: white;
@@ -135,4 +141,55 @@
 
 .content .page-header {
     border-bottom-style: none;
+}
+
+/* Smartphone test */
+
+body, header.topbar, .container, .content {
+    max-width: 768px !important;
+}
+
+body {
+    margin: 0 auto !important;
+    padding: 60px 0 0 0 !important;
+}
+
+header.topbar {
+    left: auto;
+    right: auto;
+    width: 100%;
+    form.pull-right {
+    }
+}
+
+body > div.container {
+    width: auto;
+}
+header .container {
+    width: auto !important;
+    padding: 0 10px;
+}
+
+header h1.brand {
+    margin-bottom: 0px;
+    small {
+        font-size: 12px;
+        color: white;
+    }
+}
+
+.page-header {
+    padding: 0 10px;
+}
+
+#main-tweet-box label {
+    float: none;
+}
+
+#main-tweet-box textarea {
+    width: 98%;
+}
+
+.comment-container {
+    text-align: center;
 }
