@@ -5,6 +5,7 @@ Funcan::Application.routes.draw do
   delete '/sign_out' => 'sessions#destroy'
 
   resources :funcans
+  get '/public' => 'funcans#public'
 
   root to: 'funcans#index', constraints: lambda {|r| r.session[:user_id] }
   root to: 'welcome#index'

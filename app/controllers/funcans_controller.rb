@@ -6,6 +6,11 @@ class FuncansController < ApplicationController
     @funcans = Twitter.search('#funcan', include_entities: true)
   end
 
+  def public
+    @funcans = Twitter.public_timeline(include_entities: true)
+    render :index
+  end
+
   def create
     hashtag =
       case params[:kind]
