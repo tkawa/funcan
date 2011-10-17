@@ -1,4 +1,4 @@
-Funcan::Application.routes.draw do
+FuncanApp::Application.routes.draw do
   resources :users
 
   get '/sign_in/callback' => 'sessions#create'

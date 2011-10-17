@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Funcan::Application.load_tasks
+FuncanApp::Application.load_tasks
