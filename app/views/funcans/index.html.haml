@@ -17,20 +17,21 @@
     %li= link_to 'わたしのFUNCAN', '#'
 %article
   - @tweets.each do |tweet|
-    - tweet.text.gsub!(/\s+#\w+(?=\s|\Z)/, '')
+    -#- tweet.text.gsub!(/\s+#\w+(?=\s|\Z)/, '')
     - kinds = tweet.entities.hashtags.map {|h| h.text.downcase } & ['fun', 'can']
     - kinds = ['fun', 'can'] if kinds.blank?
     .funcan.stream-item{id: "funcan_#{tweet.id_str}"}
       .tweet{class: kinds}
         .tweet-image
-          = image_tag tweet.user.profile_image_url
+          = link_to "http://twitter.com/#{tweet.user.screen_name}" do
+            = image_tag tweet.user.profile_image_url
         .tweet-content
           .tweet-row
             %span.tweet-user-name
               = tweet.user.name
           .tweet-row
             .tweet-text
-              = tweet.text
+              = sanitize tweet.html('fun' => '', 'can' => '', 'funcan' => '')
               - kinds.each do |k|
                 %span.label{class: k}= k.upcase
           %time.tweet-row
