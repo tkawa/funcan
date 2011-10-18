@@ -14,7 +14,7 @@
 }
 
 .comment-container {
-    padding: 5px 20px 10px 20px;
+    padding: 4px 20px 8px 20px;
 }
 
 .tweet-image {
@@ -112,14 +112,15 @@
     /*background-image: -webkit-linear-gradient(top, green, darkgreen);*/
 /*}*/
 
-.comment-container form {
+.comment-container form, .comment-container div {
     display: inline-block;
-    margin-bottom: auto;
+    margin-bottom: 2px;;
 }
 
 .comment-container button.info.small {
     padding: 2px 9px;
-    min-width: 75px;
+    margin-left: 2px;
+    min-width: 80px;
 }
 
 .comment-container .label.count {
@@ -137,6 +138,13 @@
     border-right-color: #62CFFC;
     right: 100%;
     top: 6px;
+}
+
+.comment-container div img {
+    position: relative;
+    top: 6px;
+    width: 22px;
+    height: 22px;
 }
 
 .content .page-header {
@@ -191,5 +199,5 @@ header h1.brand {
 }
 
 .comment-container {
-    text-align: center;
+    text-align: right;
 }

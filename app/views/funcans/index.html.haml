@@ -20,7 +20,7 @@
     - tweet.text.gsub!(/\s+#\w+(?=\s|\Z)/, '')
     - kinds = tweet.entities.hashtags.map {|h| h.text.downcase } & ['fun', 'can']
     - kinds = ['fun', 'can'] if kinds.blank?
-    .funcan.stream-item
+    .funcan.stream-item{id: "funcan_#{tweet.id_str}"}
       .tweet{class: kinds}
         .tweet-image
           = image_tag tweet.user.profile_image_url
@@ -42,4 +42,14 @@
             = button_tag name: 'type', value: type, class: 'btn info small' do
               = t type, scope: 'activerecord.model'
             %span.label.notice.count= tweet.count(type)
+      -#- jsonp_url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Ffavstar.fm%2Ft%2F#{tweet.id_str}%22%20and%20xpath%3D'%2F%2Fa%5B%40class%3D%22favCount%22%20or%20%40class%3D%22rtCount%22%5D%2Fspan%5B1%5D'&format=json&callback=?"
+      -#:javascript
+        jQuery.getJSON("#{jsonp_url}", function (json) {
+          var count = 0, r;
+          if (r = json.query.results) {
+            count = r.span[0].content;
+          }
+          console.log(this);
+          $("#funcan_#{tweet.id_str} .comment-container").append('<div><img src="http://assets3.twitter.com/images/icon_star_full.gif" alt="☆" /><span class="label notice count">' + count + '</span></div>');
+        });
 -#%p= @tweets.inspect
