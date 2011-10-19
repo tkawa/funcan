@@ -43,7 +43,7 @@ class TweetDelegator < SimpleDelegator
           when 'urls'
             %|<a href="#{e.url}" title="#{e.expanded_url}">#{e.display_url}</a>|
           when 'hashtags'
-            options[e.text] ||
+            options[e.text.downcase] ||
             %|<a href="http://twitter.com/search?q=%23#{e.text}">#{fragment[:original]}</a>|
           when 'user_mentions'
             %|<a href="http://twitter.com/#{e.screen_name}">#{fragment[:original]}</a>|
