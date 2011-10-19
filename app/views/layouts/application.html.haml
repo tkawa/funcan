@@ -7,25 +7,27 @@
     %meta(content='width=device-width, height=device-height, initial-scale=1.0' name='viewport')
     = csrf_meta_tags
   %body
-    %header.topbar
+    %header.topbar(data-dropdown="dropdown")
       .topbar-inner
         .container
           %h1.brand
             FUNCAN
-            -#%small 《ファンキャン》
           - if user_signed_in?
-            = button_to 'sign out', sign_out_path, method: :delete, form_class: 'pull-right'
-            %ul.secondary-nav
-              %li= link_to "#{current_user.name} さん", '#'
+            %ul.nav.secondary-nav
+              %li.dropdown
+                = link_to "#{current_user.name} さん", '#', class: 'dropdown-toggle'
+                %ul.dropdown-menu
+                  %li
+                    = button_to 'sign out', sign_out_path, method: :delete, form_class: 'pull-right'
           - else
-            = button_to 'sign in with Twitter', sign_in_path, form_class: 'pull-right'
-            -#%li= link_to 'sign in with Twitter', sign_in_path
+            = button_to 'sign in with Twitter', sign_in_path, method: :get, form_class: 'pull-right'
     .container
       .content
         = yield
     %footer
-      - limit = Twitter.rate_limit_status
-      .limit
-        API: #{limit.remaining_hits} / #{limit.hourly_limit}
+      - if user_signed_in?
+        - limit = Twitter.rate_limit_status
+        .limit
+          API: #{limit.remaining_hits} / #{limit.hourly_limit}
       %address
         kawamura at u2plus.jp

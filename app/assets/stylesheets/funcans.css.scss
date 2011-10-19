@@ -2,6 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.content h1 small {
+    color: #404040;
+}
+
+header.topbar input[type="submit"] {
+    padding: 6px 9px;
+}
+
+header.topbar .dropdown-menu form.pull-right {
+    margin: 0 6px 0 0;
+}
+
 .stream-item {
     border-bottom: 1px solid #ebebeb;
     min-height: 60px;
