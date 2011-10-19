@@ -4,17 +4,17 @@ class FuncansController < ApplicationController
   def index
     raw = Twitter.search('#funcan', include_entities: true)
     #funcan_cache = Funcan.where(:sid => raw.map(&:id_str)).all
-    @tweets = raw.map {|t| TweetDelegator.new(t) }
+    @tweets = raw.map {|t| FuncanDelegator.new(t) }
   end
 
   def public
-    @tweets = Twitter.public_timeline(include_entities: true).map {|t| TweetDelegator.new(t) }
+    @tweets = Twitter.public_timeline(include_entities: true).map {|t| FuncanDelegator.new(t) }
     render :index
   end
 
   def create
     hashtag =
-      case params[:kind]
+      case params[:type]
         when 'fun'
           '#funcan #fun'
         when 'can'

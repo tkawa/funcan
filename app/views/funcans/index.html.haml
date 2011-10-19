@@ -6,22 +6,19 @@
       .text-area
         = text_area_tag :text, nil, class: 'xxlarge', required: true
       .button-container
-        = button_tag class: 'btn fun', name: 'kind', value: 'fun' do
+        = button_tag class: 'btn fun', name: 'type', value: 'fun' do
           FUN
-        = button_tag class: 'btn can', name: 'kind', value: 'can' do
+        = button_tag class: 'btn can', name: 'type', value: 'can' do
           CAN
-        = button_tag class: 'btn funcan success', name: 'kind', value: 'funcan' do
+        = button_tag class: 'btn funcan success', name: 'type', value: 'funcan' do
           FUN & CAN
   %ul.tabs
     %li.active= link_to 'みんなのFUNCAN', '#'
     %li= link_to 'わたしのFUNCAN', '#'
 %article
   - @tweets.each do |tweet|
-    -#- tweet.text.gsub!(/\s+#\w+(?=\s|\Z)/, '')
-    - kinds = tweet.entities.hashtags.map {|h| h.text.downcase } & ['fun', 'can']
-    - kinds = ['fun', 'can'] if kinds.blank?
     .funcan.stream-item{id: "funcan_#{tweet.id_str}"}
-      .tweet{class: kinds}
+      .tweet{class: tweet.types}
         .tweet-image
           = link_to "http://twitter.com/#{tweet.user.screen_name}" do
             = image_tag tweet.user.profile_image_url
@@ -32,10 +29,10 @@
           .tweet-row
             .tweet-text
               = sanitize tweet.html('fun' => '', 'can' => '', 'funcan' => '')
-              - kinds.each do |k|
+              - tweet.types.each do |k|
                 %span.label{class: k}= k.upcase
           %time.tweet-row
-            = link_to l(Time.parse(tweet.created_at)), "http://twitter.com/#{tweet.user.screen_name}/status/#{tweet.id_str}", class: 'tweet-timestamp'
+            = link_to l(Time.zone.parse(tweet.created_at)), "http://twitter.com/#{tweet.user.screen_name}/status/#{tweet.id_str}", class: 'tweet-timestamp'
       .comment-container
         - Comment.types.each do |type|
           -#= form_tag comments_path(tweet.id_str, type), remote: true, method: :put, 'data-update-id' => "funcan_#{tweet.id_str}_comments", 'data-type' => 'html' do

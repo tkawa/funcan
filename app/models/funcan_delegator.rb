@@ -1,4 +1,4 @@
-class TweetDelegator < SimpleDelegator
+class FuncanDelegator < SimpleDelegator
   def count(type)
     if @funcan.nil?
       @funcan = Funcan.find_by_sid(id_str)
@@ -9,6 +9,17 @@ class TweetDelegator < SimpleDelegator
       @funcan = false
       0
     end
+  end
+
+  def types
+    return @types if @types
+    @types = entities.hashtags.map {|h| h.text.downcase } & ['funcan', 'fun', 'can']
+    if @types == ['funcan']
+      @types = ['fun', 'can']
+    else
+      @types.delete('funcan')
+    end
+    @types
   end
 
   def html(options = {})
