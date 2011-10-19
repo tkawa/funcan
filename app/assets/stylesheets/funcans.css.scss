@@ -69,6 +69,11 @@
     background-color: goldenrod;
 }
 
+.btn.info, .btn.info:hover,
+.btn.success, .btn.success:hover {
+    color: white;
+}
+
 .btn.fun {
     color: white;
     background-repeat: repeat-x;

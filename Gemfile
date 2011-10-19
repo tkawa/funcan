@@ -18,7 +18,6 @@ end
 
 gem 'jquery-rails'
 gem 'haml'
-gem 'less-rails-bootstrap'
 gem 'omniauth'
 gem 'twitter'
 
