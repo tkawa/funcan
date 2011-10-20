@@ -20,7 +20,8 @@
                   %li
                     = button_to 'sign out', sign_out_path, method: :delete, form_class: 'pull-right'
           - else
-            = button_to 'sign in with Twitter', sign_in_path, method: :get, form_class: 'pull-right'
+            = form_tag sign_in_path, method: :get, id: 'sign_in', class: 'pull-right' do
+              = image_submit_tag 'sign-in-with-twitter-d.png', alt: 'Sign in with Twitter'
     .container
       .content
         = yield

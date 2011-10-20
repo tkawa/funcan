@@ -6,6 +6,17 @@
     color: #404040;
 }
 
+header.topbar form#sign_in {
+    margin: 6px 0 0 0;
+    input {
+        padding: 0;
+        width: auto;
+        height: auto;
+        /*background-color: #22697d;*/
+        background-color: darkslateblue;
+    }
+}
+
 header.topbar input[type="submit"] {
     padding: 6px 9px;
 }
@@ -197,7 +208,7 @@ body > div.container {
 }
 header .container {
     width: auto !important;
-    padding: 0 10px;
+    padding: 0 5px 0 8px;
 }
 
 header h1.brand {
