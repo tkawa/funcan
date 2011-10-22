@@ -3,7 +3,8 @@ class Tweet
   include ActiveModel::Validations
   include ActiveModel::MassAssignmentSecurity
 
-  attr_accessor :text
+  attr_accessor :text, :hashtags
+  attr_reader :raw
   validates :text, length: 1..127
 
   def attributes=(values)
@@ -18,7 +19,8 @@ class Tweet
 
   def save
     if valid?
-      Twitter.update(text, include_entities: true)
+      status = hashtags ? "#{text} #{hashtags}" : text
+      @raw = Twitter.update(status, include_entities: true)
     else
       false
     end

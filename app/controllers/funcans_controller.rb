@@ -3,7 +3,7 @@ class FuncansController < ApplicationController
 
   def index
     raw = Twitter.search('#funcan', include_entities: true)
-    #funcan_cache = Funcan.where(:sid => raw.map(&:id_str)).all
+    #funcan_cache = Funcan.where(sid: raw.map(&:id_str)).all
     @tweets = raw.map {|t| FuncanDelegator.new(t) }
   end
 
@@ -13,7 +13,7 @@ class FuncansController < ApplicationController
   end
 
   def create
-    hashtag =
+    hashtags =
       case params[:type]
         when 'fun'
           '#funcan #fun'
@@ -22,10 +22,9 @@ class FuncansController < ApplicationController
         else
           '#funcan'
       end
-    text = params[:text] + ' ' + hashtag
-    @tweet = Tweet.new(text: text)
+    @tweet = Tweet.new(text: params[:text], hashtags: hashtags)
     if @tweet.save
-      redirect_to root_url
+      render partial: 'funcan', locals: { tweet: FuncanDelegator.new(@tweet.raw) }
     else
       redirect_to :back, :notice => 'error'
     end

@@ -1,11 +1,12 @@
 .page-header
   #main-tweet-box
-    = form_tag :funcans do
+    = form_tag :funcans, id: 'new_funcan', remote: true, 'data-type' => 'html' do
       = label_tag :text do
         今日楽しめたこと・できたことは？
       .text-area
-        = text_area_tag :text, nil, class: 'xxlarge', required: true
+        = text_area_tag :text, nil, id: 'new_text', class: 'xxlarge', required: true
       .button-container
+        = image_tag 'ajax-loader-indicator.gif', alt: '*', id: 'new_indicator', style: 'display: none;'
         = button_tag class: 'btn fun', name: 'type', value: 'fun' do
           FUN
         = button_tag class: 'btn can', name: 'type', value: 'can' do
@@ -15,39 +16,7 @@
   %ul.tabs
     %li.active= link_to 'みんなのFUNCAN', '#'
     %li= link_to 'わたしのFUNCAN', '#'
-%article
+#stream-items
   - @tweets.each do |tweet|
-    .funcan.stream-item{id: "funcan_#{tweet.id_str}"}
-      .tweet{class: tweet.types}
-        .tweet-image
-          = link_to "http://twitter.com/#{tweet.user.screen_name}" do
-            = image_tag tweet.user.profile_image_url
-        .tweet-content
-          .tweet-row
-            %span.tweet-user-name
-              = tweet.user.name
-          .tweet-row
-            .tweet-text
-              = sanitize tweet.html('fun' => '', 'can' => '', 'funcan' => '')
-              - tweet.types.each do |k|
-                %span.label{class: k}= k.upcase
-          %time.tweet-row
-            = link_to l(Time.zone.parse(tweet.created_at)), "http://twitter.com/#{tweet.user.screen_name}/status/#{tweet.id_str}", class: 'tweet-timestamp'
-      .comment-container
-        - Comment.types.each do |type|
-          -#= form_tag comments_path(tweet.id_str, type), remote: true, method: :put, 'data-update-id' => "funcan_#{tweet.id_str}_comments", 'data-type' => 'html' do
-          = form_tag comments_path(tweet.id_str, type), method: :put, 'data-update-id' => "funcan_#{tweet.id_str}_comments", do
-            = button_tag name: 'type', value: type, class: 'btn info small' do
-              = t type, scope: 'activerecord.model'
-            %span.label.notice.count= tweet.count(type)
-      -#- jsonp_url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Ffavstar.fm%2Ft%2F#{tweet.id_str}%22%20and%20xpath%3D'%2F%2Fa%5B%40class%3D%22favCount%22%20or%20%40class%3D%22rtCount%22%5D%2Fspan%5B1%5D'&format=json&callback=?"
-      -#:javascript
-        jQuery.getJSON("#{jsonp_url}", function (json) {
-          var count = 0, r;
-          if (r = json.query.results) {
-            count = r.span[0].content;
-          }
-          console.log(this);
-          $("#funcan_#{tweet.id_str} .comment-container").append('<div><img src="http://assets3.twitter.com/images/icon_star_full.gif" alt="☆" /><span class="label notice count">' + count + '</span></div>');
-        });
+    = render 'funcan', tweet: tweet
 -#%p= @tweets.inspect

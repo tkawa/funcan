@@ -82,10 +82,14 @@ header.topbar .dropdown-menu form.pull-right {
     text-align: right;
     margin: 5px 0 3px 0;
     height: 29px;
+
+    button {
+        margin-left: 4px;
+    }
 }
 
-.button-container button {
-    margin-left: 4px;
+#new_indicator {
+    vertical-align: middle;
 }
 
 .label.fun, .btn.fun {
