@@ -12,3 +12,13 @@ $ ->
     .live 'ajax:complete', (xhr, status) ->
       $('#new_indicator').hide()
       $('.button-container button').prop('disabled', false)
+
+  $('.comment-container form')
+    .live 'ajax:beforeSend', (xhr, settings) ->
+      $(this).children('button').prop('disabled', true)
+    .live 'ajax:success', (data, status, xhr) ->
+      elem = $(this).children('.count')
+      elem.text(parseInt(elem.text()) + 1)
+      elem.effect('highlight')
+    .live 'ajax:complete', (xhr, status) ->
+      $(this).children('button').prop('disabled', false)
