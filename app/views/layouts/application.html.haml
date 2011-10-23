@@ -15,7 +15,9 @@
           - if user_signed_in?
             %ul.nav.secondary-nav
               %li.dropdown
-                = link_to "#{current_user.name} さん", '#', class: 'dropdown-toggle'
+                = link_to '#', class: 'dropdown-toggle' do
+                  = image_tag current_user.image, alt: '', size: '20x20'
+                  %span #{current_user.name} さん
                 %ul.dropdown-menu
                   %li
                     = button_to 'sign out', sign_out_path, method: :delete, form_class: 'pull-right'

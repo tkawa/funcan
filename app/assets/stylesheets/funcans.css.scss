@@ -17,6 +17,11 @@ header.topbar form#sign_in {
     }
 }
 
+header.topbar img {
+    margin-right: 3px;
+    vertical-align: top;
+}
+
 header.topbar input[type="submit"] {
     padding: 6px 9px;
 }

@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name, :null => false
       t.string :screen_name, :null => false
       t.string :uid, :null => false
+      t.string :image, :null => false
       t.string :provider, :null => false
       t.string :token, :null => false
       t.string :secret, :null => false
