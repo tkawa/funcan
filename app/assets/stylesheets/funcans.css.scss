@@ -193,9 +193,15 @@ header.topbar .dropdown-menu form.pull-right {
     border-bottom-style: none;
 }
 
+#comment-users .modal-footer .btn.close {
+    opacity: 1;
+    margin-top: 0;
+    color: white;
+}
+
 /* Smartphone test */
 
-body, header.topbar, .container, .content {
+body, header.topbar, .container, .content, .footer, #comment-users {
     max-width: 768px !important;
 }
 
@@ -242,4 +248,44 @@ header h1.brand {
 
 .comment-container {
     text-align: right;
+}
+
+.dialog-container {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.dialog-content {
+    margin: auto;
+    position: relative;
+    width: 240px;
+}
+
+#comment-users {
+    width: 240px;
+    min-width: 240px;
+    margin: 0 auto;
+    top: 20%;
+    left: auto;
+    position: absolute;
+}
+
+header.modal-header h1 {
+    font-size: 100%;
+    margin-bottom: 0;
+}
+
+.modal-body ul.users {
+    list-style: none;
+    margin: 0;
+    li a {
+        margin-right: 5px;
+        float: left;
+    }
+    li .name {
+        display: block;
+        padding: 15px 0;
+    }
 }

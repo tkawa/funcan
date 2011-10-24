@@ -27,6 +27,9 @@
     .container
       .content
         = yield
+    .dialog-container
+      .dialog-content
+        %section#comment-users.modal.hide
     %footer
       - if user_signed_in?
         - limit = Twitter.rate_limit_status

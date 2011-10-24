@@ -3,22 +3,39 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
   $('form#new_funcan')
-    .live 'ajax:beforeSend', (xhr, settings) ->
+    .live 'ajax:beforeSend', (event, xhr, settings) ->
       $('.button-container button').prop('disabled', true)
       $('#new_indicator').show()
-    .live 'ajax:success', (data, status, xhr) ->
-      $('#stream-items').prepend(status).children(':first').hide().fadeIn();
+    .live 'ajax:success', (event, data, status, xhr) ->
+      $('#stream-items').prepend(data).children(':first').hide().fadeIn();
       $('#new_funcan').get(0).reset()
-    .live 'ajax:complete', (xhr, status) ->
+    .live 'ajax:complete', (event, xhr, status) ->
       $('#new_indicator').hide()
       $('.button-container button').prop('disabled', false)
 
   $('.comment-container form')
-    .live 'ajax:beforeSend', (xhr, settings) ->
+    .live 'ajax:beforeSend', (event, xhr, settings) ->
       $(this).children('button').prop('disabled', true)
-    .live 'ajax:success', (data, status, xhr) ->
+    .live 'ajax:success', (event, data, status, xhr) ->
       elem = $(this).children('.count')
       elem.text(parseInt(elem.text()) + 1)
       elem.effect('highlight')
-    .live 'ajax:complete', (xhr, status) ->
+    .live 'ajax:complete', (event, xhr, status) ->
       $(this).children('button').prop('disabled', false)
+
+  $('a.label.count')
+    .live 'ajax:beforeSend', (event, xhr, settings) ->
+      event.stopPropagation()
+    .live 'ajax:success', (event, data, status, xhr) ->
+      dialog = $('#comment-users')
+      dialog.empty()
+      dialog.append(data)
+      dialog.css('top', $(this).position().top)
+#      dialog.modal(backdrop: 'static')
+      dialog.show()
+      event.stopPropagation()
+    .live 'ajax:complete', (event, xhr, settings) ->
+      event.stopPropagation()
+
+  $('.close').live 'click', ->
+    $('#comment-users').hide()

@@ -1,0 +1,12 @@
+%header.modal-header
+  -#%a.close{href: '#'} ×
+  %h1 「#{t type, scope: 'activerecord.model'}」と言っている人
+.modal-body
+  %ul.users
+    - comments.each do |comment|
+      %li.stream-item
+        = link_to "http://twitter.com/#{comment.user.screen_name}" do
+          = image_tag comment.user.image
+        %span.name= comment.user.name
+%footer.modal-footer
+  %button.btn.small.primary.close 閉じる

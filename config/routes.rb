@@ -6,7 +6,7 @@ FuncanApp::Application.routes.draw do
 
   resources :funcans, only: [:index, :create] do
     member do
-      resource :comments, path: ':type', only: [:update, :destroy],
+      resource :comments, path: ':type', only: [:show, :update, :destroy],
                           constraints: { :type => Regexp.union(Comment.types) }
     end
   end

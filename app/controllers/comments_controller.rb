@@ -1,5 +1,21 @@
 class CommentsController < ApplicationController
   before_filter :authenticate_user!
+
+  def show
+    sid = params[:id]
+    funcan = Funcan.find_by_sid(sid)
+    unless funcan
+      head :not_found
+      return
+    end
+    comments = funcan.send(params[:type].pluralize)
+    if request.xhr?
+      render partial: 'users', locals: {comments: comments, type: params[:type]}
+    else
+
+    end
+  end
+
   def update
     sid = params[:id]
     funcan = Funcan.find_or_create_by_sid(sid)
