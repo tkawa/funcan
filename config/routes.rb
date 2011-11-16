@@ -13,7 +13,7 @@ FuncanApp::Application.routes.draw do
   get '/public' => 'funcans#public'
 
   root to: 'funcans#index', constraints: lambda {|r| r.session[:user_id] }
-  root to: 'welcome#index'
+  root to: 'funcans#welcome'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
