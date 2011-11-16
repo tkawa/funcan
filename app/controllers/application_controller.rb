@@ -29,4 +29,12 @@ class ApplicationController < ActionController::Base
         redirect_to sign_in_url
       end
     end
+
+    def basic_authenticate
+      username = ENV['BASIC_USERNAME'] || 'foo'
+      password = ENV['BASIC_PASSWORD'] || 'bar'
+      authenticate_or_request_with_http_basic do |u, p|
+        (@name = u) == username && p == password
+      end
+    end
 end
