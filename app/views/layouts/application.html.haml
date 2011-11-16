@@ -31,9 +31,8 @@
       .dialog-content
         %section#comment-users.modal.hide
     %footer
-      - if user_signed_in?
-        - limit = Twitter.rate_limit_status
-        .limit
-          API: #{limit.remaining_hits} / #{limit.hourly_limit}
+      - limit = Twitter.rate_limit_status
+      .limit
+        API: #{limit.remaining_hits} / #{limit.hourly_limit}
       %address
         kawamura at u2plus.jp
