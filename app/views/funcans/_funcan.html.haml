@@ -20,6 +20,7 @@
       = form_tag comments_path(tweet.id_str, type), method: :put, remote: signed_in? do
         -#= button_tag name: 'type', value: type, class: 'btn info small' do
         = button_tag class: 'btn info small' do
+          = emoji(type)
           = t type, scope: 'activerecord.model'
         - if tweet.count(type) == 0
           %span.label.notice.count 0
