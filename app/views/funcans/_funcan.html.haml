@@ -14,10 +14,10 @@
             %span.label{class: k}= k.upcase
       %time.tweet-row
         = link_to l(Time.zone.parse(tweet.created_at)), "http://twitter.com/#{tweet.user.screen_name}/status/#{tweet.id_str}", class: 'tweet-timestamp'
-  .comment-container
-    - Comment.types.each do |type|
-      -#= form_tag comments_path(tweet.id_str, type), remote: true, method: :put, 'data-update-id' => "funcan_#{tweet.id_str}_comments", 'data-type' => 'html' do
-      = form_tag comments_path(tweet.id_str, type), method: :put, remote: signed_in? do
+  .vote-container
+    - Vote.types.each do |type|
+      -#= form_tag votes_path(tweet.id_str, type), remote: true, method: :put, 'data-update-id' => "funcan_#{tweet.id_str}_votes", 'data-type' => 'html' do
+      = form_tag votes_path(tweet.id_str, type), method: :put, remote: signed_in? do
         -#= button_tag name: 'type', value: type, class: 'btn info small' do
         = button_tag class: 'btn info small' do
           = emoji(type)
@@ -25,7 +25,7 @@
         - if tweet.count(type) == 0
           %span.label.notice.count 0
         - else
-          = link_to tweet.count(type), comments_path(tweet.id_str, type), remote: true, class: 'label notice count', 'data-type' => 'html'
+          = link_to tweet.count(type), votes_path(tweet.id_str, type), remote: true, class: 'label notice count', 'data-type' => 'html'
         -#%a.label.notice.count(href="#")= tweet.count(type)
   -#- jsonp_url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Ffavstar.fm%2Ft%2F#{tweet.id_str}%22%20and%20xpath%3D'%2F%2Fa%5B%40class%3D%22favCount%22%20or%20%40class%3D%22rtCount%22%5D%2Fspan%5B1%5D'&format=json&callback=?"
   -#:javascript
@@ -35,5 +35,5 @@
         count = r.span[0].content;
       }
       console.log(this);
-      $("#funcan_#{tweet.id_str} .comment-container").append('<div><img src="http://assets3.twitter.com/images/icon_star_full.gif" alt="☆" /><span class="label notice count">' + count + '</span></div>');
+      $("#funcan_#{tweet.id_str} .votes-container").append('<div><img src="http://assets3.twitter.com/images/icon_star_full.gif" alt="☆" /><span class="label notice count">' + count + '</span></div>');
     });

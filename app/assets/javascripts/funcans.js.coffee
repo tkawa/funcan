@@ -13,7 +13,7 @@ $ ->
       $('#new_indicator').hide()
       $('.button-container button').prop('disabled', false)
 
-  $('.comment-container form')
+  $('.vote-container form')
     .live 'ajax:beforeSend', (event, xhr, settings) ->
       $(this).children('button').prop('disabled', true)
     .live 'ajax:success', (event, data, status, xhr) ->
@@ -27,7 +27,7 @@ $ ->
     .live 'ajax:beforeSend', (event, xhr, settings) ->
       event.stopPropagation()
     .live 'ajax:success', (event, data, status, xhr) ->
-      dialog = $('#comment-users')
+      dialog = $('#vote-users')
       dialog.empty()
       dialog.append(data)
       dialog.css('top', $(this).position().top)
@@ -38,4 +38,4 @@ $ ->
       event.stopPropagation()
 
   $('.close').live 'click', ->
-    $('#comment-users').hide()
+    $('#vote-users').hide()

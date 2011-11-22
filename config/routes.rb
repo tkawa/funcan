@@ -6,8 +6,8 @@ FuncanApp::Application.routes.draw do
 
   resources :funcans, only: [:index, :create] do
     member do
-      resource :comments, path: ':type', only: [:show, :update, :destroy],
-                          constraints: { :type => Regexp.union(Comment.types) }
+      resource :votes, path: ':type', only: [:show, :update, :destroy],
+                          constraints: { :type => Regexp.union(Vote.types) }
     end
   end
   get '/public' => 'funcans#public'
@@ -43,13 +43,13 @@ FuncanApp::Application.routes.draw do
 
   # Sample resource route with sub-resources:
   #   resources :products do
-  #     resources :comments, :sales
+  #     resources :votes, :sales
   #     resource :seller
   #   end
 
   # Sample resource route with more complex sub-resources
   #   resources :products do
-  #     resources :comments
+  #     resources :votes
   #     resources :sales do
   #       get 'recent', :on => :collection
   #     end

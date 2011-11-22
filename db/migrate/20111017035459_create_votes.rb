@@ -1,6 +1,6 @@
-class CreateComments < ActiveRecord::Migration
+class CreateVotes < ActiveRecord::Migration
   def change
-    create_table :comments do |t|
+    create_table :votes do |t|
       t.string :text, null: false, default: ''
       t.belongs_to :funcan
       t.belongs_to :user
@@ -11,6 +11,6 @@ class CreateComments < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :comments, [:sid, :user_id, :type]
+    add_index :votes, [:sid, :user_id, :type]
   end
 end

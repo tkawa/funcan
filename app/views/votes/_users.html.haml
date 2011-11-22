@@ -3,10 +3,10 @@
   %h1 「#{t type, scope: 'activerecord.model'}」と言っている人
 .modal-body
   %ul.users
-    - comments.each do |comment|
+    - votes.each do |vote|
       %li.stream-item
-        = link_to "http://twitter.com/#{comment.user.screen_name}" do
-          = image_tag comment.user.image
-        %span.name= comment.user.name
+        = link_to "http://twitter.com/#{vote.user.screen_name}" do
+          = image_tag vote.user.image
+        %span.name= vote.user.name
 %footer.modal-footer
   %button.btn.small.primary.close 閉じる

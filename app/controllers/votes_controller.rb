@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class VotesController < ApplicationController
   before_filter :authenticate_user!, except: :show
 
   def show
@@ -8,9 +8,9 @@ class CommentsController < ApplicationController
       head :not_found
       return
     end
-    comments = funcan.send(params[:type].pluralize)
+    votes = funcan.send(params[:type].pluralize)
     if request.xhr?
-      render partial: 'users', locals: {comments: comments, type: params[:type]}
+      render partial: 'users', locals: {votes: votes, type: params[:type]}
     else
 
     end
@@ -19,14 +19,14 @@ class CommentsController < ApplicationController
   def update
     sid = params[:id]
     funcan = Funcan.find_or_create_by_sid(sid)
-    comment_klass = params[:type].camelize.constantize
-    comment = comment_klass.find_by_sid_and_user_id(sid, current_user.id) ||
-              comment_klass.new(sid: sid, uid: current_user.uid, user_id: current_user.id, text: '')
-    comment.text = params[:text] if params[:text].present?
-    comment.quantity += 1
+    vote_klass = params[:type].camelize.constantize
+    vote = vote_klass.find_by_sid_and_user_id(sid, current_user.id) ||
+              vote_klass.new(sid: sid, uid: current_user.uid, user_id: current_user.id, text: '')
+    vote.text = params[:text] if params[:text].present?
+    vote.quantity += 1
     count = funcan.send("#{params[:type]}_count")
-    count += 1 if comment.new_record?
-    funcan.comments << comment
+    count += 1 if vote.new_record?
+    funcan.votes << vote
 
     if request.xhr?
       if funcan.save

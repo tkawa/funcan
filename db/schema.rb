@@ -13,20 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20111017040646) do
 
-  create_table "comments", :force => true do |t|
-    t.string   "text",       :default => "", :null => false
-    t.integer  "funcan_id"
-    t.integer  "user_id"
-    t.string   "sid",                        :null => false
-    t.string   "uid",                        :null => false
-    t.integer  "quantity",   :default => 0,  :null => false
-    t.string   "type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "comments", ["sid", "user_id", "type"], :name => "index_comments_on_sid_and_user_id_and_type"
-
   create_table "funcans", :force => true do |t|
     t.string   "sid",                              :null => false
     t.integer  "comments_count",    :default => 0, :null => false
@@ -54,5 +40,19 @@ ActiveRecord::Schema.define(:version => 20111017040646) do
 
   add_index "users", ["provider", "uid"], :name => "index_users_on_provider_and_uid"
   add_index "users", ["screen_name"], :name => "index_users_on_screen_name"
+
+  create_table "votes", :force => true do |t|
+    t.string   "text",       :default => "", :null => false
+    t.integer  "funcan_id"
+    t.integer  "user_id"
+    t.string   "sid",                        :null => false
+    t.string   "uid",                        :null => false
+    t.integer  "quantity",   :default => 0,  :null => false
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["sid", "user_id", "type"], :name => "index_votes_on_sid_and_user_id_and_type"
 
 end
