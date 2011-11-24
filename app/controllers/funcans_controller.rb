@@ -14,6 +14,14 @@ class FuncansController < ApplicationController
     @tweets = raw.map {|t| FuncanDelegator.new(t) }
   end
 
+  def my
+    @tweets =
+      Twitter.user_timeline(current_user.screen_name, include_entities: true)
+        .map {|t| FuncanDelegator.new(t) }
+        .reject {|f| f.types == [] }
+    render :index
+  end
+
   def public
     @tweets = Twitter.public_timeline(include_entities: true).map {|t| FuncanDelegator.new(t) }
     render :index

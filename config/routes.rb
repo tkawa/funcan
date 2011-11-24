@@ -10,6 +10,7 @@ FuncanApp::Application.routes.draw do
                           constraints: { :type => Regexp.union(Vote.types) }
     end
   end
+  get '/my' => 'funcans#my'
   get '/public' => 'funcans#public'
 
   root to: 'funcans#index', constraints: lambda {|r| r.session[:user_id] }

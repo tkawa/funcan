@@ -15,7 +15,7 @@
           FUN & CAN
   %ul.tabs
     = list_active_if_current 'みんなのFUNCAN', root_path, 'data-pjax' => true
-    -#%li= link_to 'わたしのFUNCAN', '#'
+    = list_active_if_current 'わたし', my_path, 'data-pjax' => true
     = list_active_if_current 'その他', public_path, 'data-pjax' => true
 
 - @tweets.each do |tweet|
