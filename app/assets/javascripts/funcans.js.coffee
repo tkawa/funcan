@@ -37,5 +37,9 @@ $ ->
     .live 'ajax:complete', (event, xhr, settings) ->
       event.stopPropagation()
 
+  $(document).bind 'end.pjax', (event, xhr, options) ->
+    $('ul.tabs li').removeClass('active')
+    $("ul.tabs li:has(a[href='#{location.pathname}'])").addClass('active')
+
   $('.close').live 'click', ->
     $('#vote-users').hide()

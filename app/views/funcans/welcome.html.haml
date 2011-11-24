@@ -1,8 +1,8 @@
-.page-header
+- content_for :page_header do
   %h1
     FUNCAN
     %small 《ファンキャン》
-#stream-items
-  - @tweets.each do |tweet|
-    = render 'funcan', tweet: tweet
+
+- @tweets.each do |tweet|
+  = render 'funcan', tweet: tweet
 -#%textarea{rows: 30, cols: 100}

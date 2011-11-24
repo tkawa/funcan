@@ -1,0 +1,1 @@
+$ -> $('a[href][data-pjax]').pjax('[data-pjax-container]')

@@ -1,4 +1,4 @@
-.page-header
+- content_for :page_header do
   #main-tweet-box
     = form_tag :funcans, id: 'new_funcan', remote: true, 'data-type' => 'html' do
       = label_tag :text do
@@ -14,9 +14,9 @@
         = button_tag class: 'btn funcan success', name: 'type', value: 'funcan' do
           FUN & CAN
   %ul.tabs
-    %li.active= link_to 'みんなのFUNCAN', '#'
-    %li= link_to 'わたしのFUNCAN', '#'
-#stream-items
-  - @tweets.each do |tweet|
-    = render 'funcan', tweet: tweet
--#%p= @tweets.inspect
+    = list_active_if_current 'みんなのFUNCAN', root_path, 'data-pjax' => true
+    -#%li= link_to 'わたしのFUNCAN', '#'
+    = list_active_if_current 'その他', public_path, 'data-pjax' => true
+
+- @tweets.each do |tweet|
+  = render 'funcan', tweet: tweet

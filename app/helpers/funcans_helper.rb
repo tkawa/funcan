@@ -10,4 +10,10 @@ module FuncansHelper
       image_tag "#{type.camelize.constantize.emoji_code}.png", alt: '', class: 'emoji'
     end
   end
+
+  def list_active_if_current(body, url_options = {}, html_options = {})
+    content_tag :li, class: current_page?(url_options) ? 'active' : nil do
+      link_to body, url_options, html_options
+    end
+  end
 end

@@ -7,4 +7,6 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
+//= require pjax/jquery_pjax
+//= require pjax/page_triggers
 //= require_tree .
