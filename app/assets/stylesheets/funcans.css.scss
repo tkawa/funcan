@@ -189,6 +189,16 @@ header.topbar .dropdown-menu form.pull-right {
     height: 22px;
 }
 
+.vote-container button.btn.info {
+    span.emoji {
+        font-size: 22px;
+    }
+    img.emoji {
+        width: 20px;
+        height: 20px;
+    }
+}
+
 .content .page-header {
     border-bottom-style: none;
 }

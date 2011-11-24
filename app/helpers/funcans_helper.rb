@@ -3,9 +3,15 @@ module FuncansHelper
     session[:user_id].present?
   end
 
+  def from_ios?
+    request.user_agent.include?('iPhone') ||
+    request.user_agent.include?('iPad') ||
+    request.user_agent.include?('iPod')
+  end
+
   def emoji(type, opt = nil)
-    if opt == :iphone
-      "&#x#{type.camelize.constantize.emoji_code}"
+    if from_ios? || opt == :ios
+      content_tag :span, "&#x#{type.camelize.constantize.emoji_code}", {class: 'emoji'}, false
     else
       image_tag "#{type.camelize.constantize.emoji_code}.png", alt: '', class: 'emoji'
     end
