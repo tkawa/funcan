@@ -1,6 +1,4 @@
 FuncanApp::Application.routes.draw do
-  resources :users
-
   get '/sign_in/callback' => 'sessions#create'
   delete '/sign_out' => 'sessions#destroy'
 
@@ -12,6 +10,10 @@ FuncanApp::Application.routes.draw do
   end
   get '/my' => 'funcans#my'
   get '/public' => 'funcans#public'
+
+  namespace :admin do
+    resources :users
+  end
 
   root to: 'funcans#index', constraints: lambda {|r| r.session[:user_id] }
   root to: 'funcans#welcome'
