@@ -8,7 +8,7 @@ FuncanApp::Application.routes.draw do
                           constraints: { :type => Regexp.union(Vote.types) }
     end
   end
-  get '/my' => 'funcans#my'
+  get '/users/:screen_name', to: 'funcans#index_user', as: 'user_funcans'
   get '/public' => 'funcans#public'
 
   namespace :admin do

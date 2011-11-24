@@ -14,9 +14,9 @@ class FuncansController < ApplicationController
     @tweets = raw.map {|t| FuncanDelegator.new(t) }
   end
 
-  def my
+  def index_user
     @tweets =
-      Twitter.user_timeline(current_user.screen_name, include_entities: true)
+      Twitter.user_timeline(params[:screen_name], include_entities: true)
         .map {|t| FuncanDelegator.new(t) }
         .reject {|f| f.types == [] }
     render :index
