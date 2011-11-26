@@ -287,15 +287,24 @@ header.modal-header h1 {
     margin-bottom: 0;
 }
 
-.modal-body ul.users {
-    list-style: none;
-    margin: 0;
-    li a {
-        margin-right: 5px;
-        float: left;
+.modal-body {
+    ul.users {
+        list-style: none;
+        margin: 0;
+        li a {
+            margin-right: 5px;
+            float: left;
+        }
+        li .name {
+            display: block;
+            padding: 15px 0;
+        }
     }
-    li .name {
-        display: block;
-        padding: 15px 0;
+    form#sign_in {
+        text-align: center;
+        input {
+            width: auto;
+            height: auto;
+        }
     }
 }

@@ -264,6 +264,7 @@ ja:
   sign_up: ユーザー登録
   sign_in: ログイン
   sign_out: ログアウト
+  need_to_sign_in: ログインが必要です
   forgot_your_password: パスワードを忘れたら？
   "Send me reset password instructions": パスワード再設定のメールを送る
   "Didn't receive confirmation instructions?": 確認メールが受け取れなかったら？

@@ -20,6 +20,12 @@ $ ->
       elem = $(this).children('.count')
       elem.text(parseInt(elem.text()) + 1)
       elem.effect('highlight')
+    .live 'ajax:error', (event, xhr, status, error) ->
+      dialog = $('#vote-users')
+      dialog.empty()
+      dialog.append(xhr.responseText)
+      dialog.css('top', $(this).position().top)
+      dialog.show()
     .live 'ajax:complete', (event, xhr, status) ->
       $(this).children('button').prop('disabled', false)
 

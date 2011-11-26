@@ -25,8 +25,12 @@ class ApplicationController < ActionController::Base
         Twitter.oauth_token = current_user.token
         Twitter.oauth_token_secret = current_user.secret
       else
-        flash[:error] = 'You need to sign in before accessing this page!'
-        redirect_to sign_in_url
+        flash[:error] = t('need_to_sign_in')
+        if request.xhr?
+          render partial: 'shared/dialog', status: 403 # Forbidden
+        else
+          redirect_to root_url
+        end
       end
     end
 

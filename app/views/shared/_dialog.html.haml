@@ -1,0 +1,7 @@
+%header.modal-header
+  %h1= flash[:error]
+.modal-body
+  = form_tag sign_in_path, method: :get, id: 'sign_in' do
+    = image_submit_tag 'sign-in-with-twitter-d.png', alt: 'Sign in with Twitter'
+%footer.modal-footer
+  %button.btn.small.primary.close 閉じる

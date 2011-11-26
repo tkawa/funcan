@@ -17,7 +17,7 @@
   .vote-container
     - Vote.types.each do |type|
       -#= form_tag votes_path(tweet.id_str, type), remote: true, method: :put, 'data-update-id' => "funcan_#{tweet.id_str}_votes", 'data-type' => 'html' do
-      = form_tag votes_path(tweet.id_str, type), method: :put, remote: signed_in? do
+      = form_tag votes_path(tweet.id_str, type), method: :put, remote: true do
         -#= button_tag name: 'type', value: type, class: 'btn info small' do
         = button_tag class: 'btn info small' do
           = emoji(type)
