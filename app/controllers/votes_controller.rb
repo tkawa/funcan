@@ -2,8 +2,7 @@ class VotesController < ApplicationController
   before_filter :authenticate_user!, except: :show
 
   def show
-    sid = params[:id]
-    funcan = Funcan.find_by_sid(sid)
+    funcan = Funcan.find_by_sid(params[:funcan_id])
     unless funcan
       head :not_found
       return
@@ -16,12 +15,13 @@ class VotesController < ApplicationController
     end
   end
 
-  def update
-    sid = params[:id]
+  def create
+    sid = params[:funcan_id]
     funcan = Funcan.find_or_create_by_sid(sid)
     vote_klass = params[:type].camelize.constantize
-    vote = vote_klass.find_by_sid_and_user_id(sid, current_user.id) ||
-              vote_klass.new(sid: sid, uid: current_user.uid, user_id: current_user.id, text: '')
+    vote =
+      vote_klass.find_by_sid_and_user_id(sid, current_user.id) ||
+      vote_klass.new(sid: sid, uid: current_user.uid, user_id: current_user.id, text: '')
     vote.text = params[:text] if params[:text].present?
     vote.quantity += 1
     count = funcan.send("#{params[:type]}_count")
@@ -30,7 +30,7 @@ class VotesController < ApplicationController
 
     if request.xhr?
       if funcan.save
-        render json: count
+        render json: {count: count}
       else
         head :bad_request # 400 Bad Request
       end

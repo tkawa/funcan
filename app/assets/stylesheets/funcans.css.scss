@@ -182,6 +182,10 @@ header.topbar .dropdown-menu form.pull-right {
     top: 6px;
 }
 
+.vote-container a.label.count:hover {
+    text-decoration: none;
+}
+
 .vote-container div img {
     position: relative;
     top: 6px;

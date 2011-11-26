@@ -3,10 +3,8 @@ FuncanApp::Application.routes.draw do
   delete '/sign_out' => 'sessions#destroy'
 
   resources :funcans, only: [:index, :create] do
-    member do
-      resource :votes, path: ':type', only: [:show, :update, :destroy],
-                          constraints: { :type => Regexp.union(Vote.types) }
-    end
+    resource :votes, path: ':type', only: [:show, :create, :destroy],
+                     constraints: { type: Regexp.union(Vote.types) }
   end
   get '/users/:screen_name', to: 'funcans#index_user', as: 'user_funcans'
   get '/public' => 'funcans#public'

@@ -18,6 +18,8 @@ $ ->
       $(this).children('button').prop('disabled', true)
     .live 'ajax:success', (event, data, status, xhr) ->
       elem = $(this).children('.count')
+      if elem.attr('href') is undefined
+        elem.attr(href: $(this).attr('action'), 'data-remote': 'true', 'data-type': 'html')
       elem.text(parseInt(elem.text()) + 1)
       elem.effect('highlight')
     .live 'ajax:error', (event, xhr, status, error) ->
